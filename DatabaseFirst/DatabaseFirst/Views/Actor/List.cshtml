@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DatabaseFirst.Models.Actor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Add">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.ActorId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ActorId }) |
+            </td>
+            <td>
+                <form asp-controller="Actor" asp-action="Delete" asp-route-id="@item.ActorId" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

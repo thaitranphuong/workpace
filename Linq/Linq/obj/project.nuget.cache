@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "+G7oAJGPiGfm9O6EjPwosZNmHfNJ+re3wn57EyZUUpqQHnUyNZSeBpx6jn6758MMkJ18OfsR5CVNd9F6FjcowA==",
+  "success": true,
+  "projectFilePath": "D:\\workspace\\Linq\\Linq\\Linq.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\intern.tpthai\\.nuget\\packages\\documentformat.openxml\\3.0.2\\documentformat.openxml.3.0.2.nupkg.sha512",
+    "C:\\Users\\intern.tpthai\\.nuget\\packages\\documentformat.openxml.framework\\3.0.2\\documentformat.openxml.framework.3.0.2.nupkg.sha512",
+    "C:\\Users\\intern.tpthai\\.nuget\\packages\\system.io.packaging\\8.0.0\\system.io.packaging.8.0.0.nupkg.sha512",
+    "C:\\Users\\intern.tpthai\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512"
+  ],
+  "logs": []
+}

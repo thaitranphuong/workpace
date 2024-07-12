@@ -1,0 +1,69 @@
+﻿Microsoft.Data.SqlClient
+Dapper
+
+ services.AddTransient<IDbConnection>((sp) =>
+            {
+                return new MySqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+private readonly IDbConnection _dbConnection;
+
+Execute
+    string sql = "INSERT INTO Records (Name) VALUES (@Name)";
+    await _dbConnection.ExecuteAsync(sql, new { Name = name });
+
+Query
+    string sql = "SELECT * FROM Records";
+    return await _dbConnection.QueryAsync<Record>(sql);
+
+QueryFirst
+QueryFirstOrDefault
+QuerySingle
+QuerySingleOrDefault
+    string sql = "SELECT * FROM Records LIMIT 1";
+    return await _dbConnection.QueryFirstAsync<Record>(sql);
+
+QueryMutiple
+    string sql = @"
+        SELECT * FROM Records;
+        SELECT * FROM OtherRecords;";
+
+    using (var multi = await _dbConnection.QueryMultipleAsync(sql))
+    {
+        var records = await multi.ReadAsync<Record>();
+        var otherRecords = await multi.ReadAsync<OtherRecord>();
+        return (records, otherRecords);
+    }
+
+---------------------
+Store Procedure:
+
+public async Task<IEnumerable<MyModel>> CallStoredProcedureAsync(string parameter)
+{
+    string procedureName = "YourStoredProcedureName";
+    
+    // Sử dụng tham số
+    var parameters = new { ParameterName = parameter };
+
+    // Gọi stored procedure và trả về kết quả
+    return await _dbConnection.QueryAsync<MyModel>(
+        procedureName,
+        parameters,
+        commandType: CommandType.StoredProcedure
+    );
+}
+
+public async Task<int> CallStoredProcedureAsync(string parameter)
+{
+    string procedureName = "YourStoredProcedureName";
+    
+    // Sử dụng tham số
+    var parameters = new { ParameterName = parameter };
+
+    // Gọi stored procedure và trả về số dòng ảnh hưởng
+    return await _dbConnection.ExecuteAsync(
+        procedureName,
+        parameters,
+        commandType: CommandType.StoredProcedure
+    );
+}

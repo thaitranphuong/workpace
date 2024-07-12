@@ -1,0 +1,16 @@
+﻿Automapper.Extensions.Microsoft.Dependencyinjection
+
+public class ActorProfile : Profile
+    {
+        public ActorProfile()
+        {
+            CreateMap<ActorDTO, Actor>()
+                .ForMember(dest => dest.FirstName, src => src.MapFrom(x => x.FirstName))
+                .ForMember(dest => dest.LastName, src => src.MapFrom(x => x.LastName));
+        }
+    }
+
+services.AddAutoMapper(typeof(Startup));
+
+var actorDTO = _mapper.Map<ActorDTO>(actor); //tạo ra đối tượng mới
+_mapper.Map(actorDTO, actor); // ghi đè dữ liệu
